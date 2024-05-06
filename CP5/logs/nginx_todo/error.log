@@ -1,0 +1,4 @@
+2024/03/22 19:55:42 [emerg] 6#6: host not found in upstream "todo" in /etc/nginx/sites-available/todo.conf:29
+2024/04/22 19:32:16 [emerg] 7#7: host not found in upstream "todo" in /etc/nginx/sites-available/todo.conf:29
+2024/04/22 20:03:02 [emerg] 7#7: host not found in upstream "todo" in /etc/nginx/sites-available/todo.conf:29
+2024/05/06 19:11:41 [emerg] 7#7: getpwnam("www-data") failed in /etc/nginx/nginx.conf:1
