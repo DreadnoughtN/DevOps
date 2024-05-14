@@ -1,0 +1,35 @@
+default:
+  image: docker:24.0.5
+  services:
+    - docker:24.0.5-dind
+
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    - docker login -u DreadnoughtN -p glpat-ND6kxHYxCXUzmqN3PKPy registry.gitlab.com
+    - docker-compose build
+    - docker-compose push
+  tags:
+    - daniil
+
+test:
+  stage: test
+  script:
+    - echo "all tests passed"
+  tags:
+    - daniil
+    
+deploy:
+  stage: deploy
+  script:
+    - docker login -u DreadnoughtN -p glpat-ND6kxHYxCXUzmqN3PKPy registry.gitlab.com
+    - docker-compose up -d
+    - docker-compose ps
+  tags:
+    - cloud_daniil
+

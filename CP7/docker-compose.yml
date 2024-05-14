@@ -1,0 +1,8 @@
+version: "3"
+services:
+  web_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: registry.gitlab.com/dreadnoughtn/devops/web-app:latest
+    ports: "5000:5000"
