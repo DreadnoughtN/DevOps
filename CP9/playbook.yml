@@ -1,0 +1,41 @@
+---
+- name: DevOps CP9
+  hosts: all
+  become: yes
+  
+  tasks: 
+    - name: system update
+      apt: 
+        update_cache: yes
+   
+    - name: clean cache
+      apt:
+        autoclean: yes
+
+    - name: adding gitlab-runner repo
+      shell: curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh" | sudo bash
+
+    - name: install packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items: 
+        - git
+        - curl
+        - docker.io
+        - docker-compose
+        - gitlab-runner
+        - traceroute
+    
+    - name: add gitlab runner to docker group
+      shell: usermod -aG docker gitlab-runner
+
+    - name: gitlab runner register
+      command: |
+        gitlab-runner register \
+          --non-interactive \
+          --url "https://gitlab.com" \
+          --registration-token "GR1348941KnTzk1i6UaCzD62SPM2z" \
+          --executor "shell" \
+          --description "cp9-runner" \
+          --tag-list "cp9" 
